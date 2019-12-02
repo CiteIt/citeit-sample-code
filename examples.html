@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CiteIt.net Examples</title>
 
-  <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-  <script src='https://code.jquery.com/jquery-migrate-3.1.0.min.js'></script>
-  <script src='js/forge-sha256.min.js'></script>
-  <script src='js/CiteIt-quote-context.js'></script>
-  <script src='js/jsVideoUrlParser.min.js'></script>
+  <script src='js/lib/jquery-3.4.1.min.js'></script>
+  <script src='js/lib/forge-sha256/build/forge-sha256.min.js' defer></script>
+  <script src='js/versions/0.3/CiteIt-quote-context.js' defer></script>
+  <script src='js/lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
 
   <style>
 	body {
@@ -33,7 +32,7 @@
 	}
 
 	div.quote {
-		//width: 500px;
+		width: 500px;
 	}
 	div.quote_context {
 		color: #999;
@@ -153,7 +152,9 @@ to develop a provocative 30-second ad on an <b>unrelated wedge issue</b>.</p>
   <div id='neotext_container'><!-- neotext quote-context.js injects data returned from lookup in this hidden div --></div>
   <script>
 	// Call plugin on all blockquotes:
-	jQuery('q, blockquote').quoteContext();
+	$( document ).ready(function() {
+		jQuery('q, blockquote').quoteContext();
+	});
   </script>
 
 </body>
