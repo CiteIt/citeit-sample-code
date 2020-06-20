@@ -3,7 +3,7 @@
 $JSON_FOLDER = "CiteIt.net_json/";
 
 function get_json_from_webservice($submitted_url){
-  	$CITEIT_BASE_URL = 'http://api.citeit.net/citeit?url=';
+  	$CITEIT_BASE_URL = 'http://api.citeit.net/?url=';
 	$DOMAIN_FILTER_DISABLED = True; 
 	$DOMAIN_FILTER = "citeit.net";  // do not save unless from this domain	
 	$parse = parse_url($submitted_url);
@@ -25,6 +25,7 @@ function get_json_from_webservice($submitted_url){
 				$folder = "CiteIt.net_json/";
 				$filename = $GLOBALS['JSON_FOLDER'] . $sha256 . '.json';
 				$json = json_encode($data);
+
 				file_put_contents($filename, $json);
 
 				$public_url = sha_to_url($sha256);
@@ -40,9 +41,8 @@ function get_json_from_webservice($submitted_url){
 
 function sha_to_url($sha256){
   // Construct a link to the JSON snippet on the main CiteIt site	
-  //$CiteIt_read_base_url = 'https://read.citeit.net/quote/sha256/0.3/';
-  // $shard = 	substr($sha256, 2);
-  return  $GLOBALS['JSON_FOLDER'] . $sha256 . '.json';
+  return 'https://read.citeit.net/quote/sha256/0.4/' . substr($sha256, 0, 2) . "/" . $sha256 . '.json';
+
 }
 
 function print_json_files($path){
@@ -122,48 +122,53 @@ function print_json_files($path){
 </head>
 <body>
 
-<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
-<h2>a higher standard of citation</h2>
+	<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
+	<h2>a higher standard of citation</h2>
 
-<p>Submit your page to be indexed.  This will retreive the 500 characters of context before and after your quotation and store it in a JSON snippet.<p>
+	<p>Submit your page to be indexed.  This will retreive the 500 characters of context 
+	   before and after your quotation and store it in a JSON snippet.
+	</p>
 
-<form action="" method="POST">
-  <input class="url" 
-  	type="url" 
-	name="url"
-  	onfocus="if (this.value=='https://') this.value = 'https://'"
-  	value="<?php print($_POST['url'] ? $_POST['url']: 'https://' ); ?>"
-  >
-  <input class="submit" type="submit" value="submit page" />
-</form>
+	<form action="" method="POST">
+	  <input class="url" 
+	  	type="url" 
+		name="url"
+	  	onfocus="if (this.value=='https://') this.value = 'https://'"
+	  	value="<?php print($_POST['url'] ? $_POST['url']: 'https://' ); ?>"
+	  >
+	  <input class="submit" type="submit" value="submit page" />
+	</form>
 
-<!--p>This will generate JSON text snippets containing the 500 charactters of context for each quote.</p-->
-
-
-<?php
-if (isset($_POST['url'])){
-  print("<h3>Results:</h3>");
-  $json = get_json_from_webservice($_POST['url']);
-
-}
-?>
-
-<div id="list_citations">
-<?php
-	print_json_files($JSON_FOLDER);
-?>
-</div>
-
-<div id="footer">
-	<p><b>What:</b> <a href="https://www.citeit.net/">CiteIt.net</a> is a citation tool that <b>enables web authors to demonstrate the context</b> of their citations.</p>
-	<p><b>Who:</b> CiteIt.net allows journalists, academics and web authors who want to set a higher standard of discourse.</p>
-	<p><b>How:</b> CiteIt.net is an <a href="https://www.citeit.net/code/">open source program</a> which can be added to a website with a WordPress plugin or a bit of custom code.</p>
-</div>
+	<!--p>This will generate JSON text snippets containing the 500 charactters of context for each quote.</p-->
 
 
-<div id="navigation">
-	<b>New Submission</b> | <a href="examples.php">Examples</a>
-</div>
+	<?php
+	if (isset($_POST['url'])){
+	  print("<h3>Results:</h3>");
+	  $json = get_json_from_webservice($_POST['url']);
+
+	}
+	?>
+
+	<div id="list_citations">
+	<?php
+		print_json_files($JSON_FOLDER);
+	?>
+	</div>
+
+	<div id="footer">
+		<p><b>What:</b> <a href="https://www.citeit.net/">CiteIt.net</a> is a citation tool that 
+			<b>enables web authors to demonstrate the context</b> of their citations.
+		</p>
+		<p><b>Who:</b> CiteIt.net allows journalists, academics and web authors who want to set a higher standard of discourse.</p>
+		<p><b>How:</b> CiteIt.net is an <a href="https://www.citeit.net/code/">open source program</a> which 
+			can be added to a website with a WordPress plugin or a bit of custom code.
+		</p>
+	</div>
+
+	<div id="navigation">
+		<b>New Submission</b> | <a href="examples.html">Examples</a>
+	</div>
 
 
 </body>
