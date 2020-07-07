@@ -178,8 +178,9 @@ function print_json_files($path){
 	<ul>
 		<li>Submit a URL for Indexing: (POST-preferred)
 			<ul>
-			<li><a rel="nofollow" href="http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html">http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html</a>
+			<li>summary: <a rel="nofollow" href="http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html">http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html</a>
 			</li>
+			<li>list: <a href="http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html&format=list">http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html&amp;format=list</a></li>
 			</ul>
 		</li>
 

@@ -66,7 +66,7 @@
 	<h2>a higher standard of citation</h2>
 
 
-	<form action="http://api.citeit.net/document/text-version" method="GET">
+	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET">
 	  <input class="url"
 	  	type="url"
 		name="url"
