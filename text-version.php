@@ -65,7 +65,7 @@
 	<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
 	<h2>a higher standard of citation</h2>
 
-
+	<!--form action="http://localhost/v0.4/url/text-version" method="GET"-->
 	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET">
 	  <input class="url"
 	  	type="url"
@@ -73,6 +73,11 @@
 	  	onfocus="if (this.value=='https://') this.value = 'https://'"
 	  	value="<?php print($_POST['url'] ? $_POST['url']: 'https://' ); ?>"
 	  >
+	  <select name="line_separator">
+		<option value="">wrap lines</option>
+		<option value="\n">break new lines</option>
+	  </select>	
+
 	  <input class="submit" type="submit" value="submit page" />
 	</form>
 
@@ -87,12 +92,14 @@
 	<h3>What this does:</h3>
 
     <p>
-       This will convert the html of a webpage to a text-only version
+       This will convert the html of a webpage to a text-only version.
 	</p>
-
-    <p>If you would like to work on the <b>PDF -> text</b> conversion, <a href="https://www.openpolitics.com/tim">send me an email</a>.</p>
-
-
+<ul>
+  <li>It will also generate a transcript for <b>YouTube videos</b> if you enter the URL of a video that contains a transcript.</li>
+  <li>I've also added <b>PDF support</b> to the native Python version of the service but 
+	  I have not yet gotten PDF support configured as part of the <b>Docker image</b> (which this website uses).
+  </li>
+</ul>
 
 	<!---------------------- Display API Methods ----------------------->
 	<h3>API Examples</h3>
