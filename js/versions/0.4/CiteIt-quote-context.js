@@ -125,9 +125,16 @@ jQuery.fn.quoteContext = function() {
       if (cited_url.length > 3){
         var tag_type = jQuery(this)[0].tagName.toLowerCase();
         var hash_key = quoteHashKey(citing_quote, citing_url, cited_url);
-	console.log(hash_key);
-	var hash_value = forge_sha256(hash_key);
-	console.log(hash_value);
+
+		// Javascript uses utf-16.  Convert to utf-8
+		hash_key = encode_utf8(hash_key); 
+
+		//alert(hash_key);
+
+		console.log(hash_key);
+		var hash_value = forge_sha256(hash_key);
+		console.log(hash_value);
+
         var shard = hash_value.substring(0,2);
         var read_base = "https://read.citeit.net/quote/";
         var read_url = read_base.concat("sha256/", webservice_version_num, "/",
@@ -161,8 +168,8 @@ jQuery.fn.quoteContext = function() {
             //Add content to a hidden div, so that the popup can later grab it
             jQuery("#" + hidden_container).append(
               "<div id='" + q_id + "' class='highslide-maincontent'>.. " +
-                json.cited_context_before + " " + " <strong>" +
-                json.citing_quote + "</strong> " +
+                json.cited_context_before + " " + " <span class='q-tag-highlight'><strong>" +
+                json.citing_quote + "</strong></span> " +
                 json.cited_context_after + ".. </p>" +
                 "<p><a href='" + json.cited_url +
                 "' target='_blank'>Read more</a> | " +
@@ -198,7 +205,7 @@ jQuery.fn.quoteContext = function() {
 			if( json.cited_context_before.length > 0){
 			        context_before.before("<div class='quote_arrows' id='context_up_" + json.sha256 + "'> \
 				<a id='quote_arrow_up_" + json.sha256 + "' \
-                     href=\"javascript:toggleQuote('quote_arrow_up', 'quote_before_" + json.sha256 + "');\">&#9650;</a>" + trimDefault(embed_ui.icon) +
+                     href=\"javascript:toggleQuote('quote_arrow_up', 'quote_before_" + json.sha256 + "');\">&#9650;</a> " + trimDefault(embed_ui.icon) +
 				"</div>"
 				);
 			}
@@ -498,6 +505,8 @@ function embedUi(url, json){
                          "' width='560' height='315' " +
                          "frameborder='0' allowfullscreen='allowfullscreen'>" +
                      "</iframe>";
+
+		//alert(embed_html);
       }
       else if (url_provider == "vimeo") {
         // Create Canonical Embed URL:
@@ -523,6 +532,7 @@ function embedUi(url, json){
         embed_icon = "<span class='view_on_youtube'>" +
                       "<br ><a href=\" \">Expand: Show SoundCloud Clip</a></span>";
       }
+      
 
       embed_ui.url_provider = url_provider;
       embed_ui.icon = embed_icon;
@@ -560,3 +570,14 @@ function isWordpressPreview(citing_url){
 
   return is_wordpress_preview;
 }
+
+// *************** Convert string to UTF-8 *******************
+
+function encode_utf8( s ) {
+  return unescape( encodeURIComponent( s ) );
+}
+
+function decode_utf8( s ) {
+  return decodeURIComponent( escape( s ) );
+}
+

@@ -14,19 +14,24 @@ div.ui-dialog, div.ui-widget {
 	z-index: 999999;
 }
 
+div.ui-dialog-content {
+	line-height: 150%;
+}
+
 span.blockquote {
 	color: #555;
 }
 
-div.quote_arrows, div.quote_arrows a, q, q a, span.q  {
-	/* color: #be1e2d;	*/					/* maroon: Credit: http://meta.stackoverflow.com */
+div.quote_arrows a, q, q a, span.q, a.citeit_source_domain {
 	color: #0ebfe9;
-	text-align: center;
 }
 
 q, q a, span.q {
-	/* border-bottom: 1px dotted #444;		 maroon: Credit: http://meta.stackoverflow.com */
-	border-bottom: 1px dotted #0ebfe9;
+	border-bottom: 2px double #0ebfe9;
+}
+
+span.q-tag-highlight {
+	background-color: yellow;
 }
 
 div.citeit_source {
@@ -42,7 +47,7 @@ span.citeit_source_label {
   color: #999;
 }
 
-/* JQUERY DEMO STYLE */
+/* jQuery Demo Style */
 div#demo_content {
 	background-color: #eee;
 	border: 1px solid #777;
@@ -65,7 +70,6 @@ div#demo_content {
   background: #080;
 }
 
-
 div.highslide-maincontent{
 	font-size: 12px;
 }
@@ -80,14 +84,14 @@ div.highslide-maincontent a{
 }
 
 /* blockquote style */
-div.quote_contexts {
+div.quote_arrows {
 	text-align: center;
 	color: #0ebfe9;
 	font-size: 16px;
 	line-height: 1.5;
 }
 
-div.quote_contexts.context_up {
+div.quote_arrows.context_up {
 	margin: 0 0 -25px 0;
 }
 
@@ -104,7 +108,6 @@ blockquote.quote_context {
 	border-left-color: #fff;
 	border-left-width: 0px;
 	color: #999;
-	margin-top: 0px;  /* -20px Expand video */
 }
 
 div.source_info {
@@ -124,15 +127,9 @@ a.inline_source {
   margin-left: 20px;
 }
 
-a.quote_arrows {
-  border: 0px;
-  outline : none;
-}
-.rotated180{
+a.rotated180{
   display: block;
   transform: rotate(180deg);
-  border: 0px;
-  outline : none;
 
   /* Safari */
   -webkit-transform: rotate(180deg);
@@ -147,6 +144,7 @@ a.quote_arrows {
   -o-transform: rotate(180deg);
 
 }
+
 
 /*********** Phone-specific Styles *************/
 @media only screen and (max-width: 768px) {
