@@ -92,7 +92,7 @@
 	<h3>What this does:</h3>
 
     <p>
-       This will convert the html of a webpage to a text-only version.
+       This will <b>convert the html</b> of a webpage to a <b>text</b>-only version.
 	</p>
 <ul>
   <li>It will also generate a transcript for <b>YouTube videos</b> if you enter the URL of a video that contains a transcript.</li>
