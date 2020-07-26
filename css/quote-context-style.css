@@ -24,10 +24,11 @@ span.blockquote {
 
 div.quote_arrows a, q, q a, span.q, a.citeit_source_domain {
 	color: #0ebfe9;
+	border: 0px;
 }
 
 q, q a, span.q {
-	border-bottom: 2px double #0ebfe9;
+	border-bottom: 5px double #0ebfe9;
 }
 
 span.q-tag-highlight {
@@ -151,6 +152,7 @@ a.rotated180{
 
 div.quote_arrows a {
 	font-size: 150%;						/* make it larger: to select on phone screen */
+	border: 0px;
 }
 span.view_on_youtube {
 	font-size: 65%;
