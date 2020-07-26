@@ -136,7 +136,7 @@ function print_json_files($path){
 	  	onfocus="if (this.value=='https://') this.value = 'https://'"
 	  	value="<?php print($_POST['url'] ? $_POST['url']: 'https://' ); ?>"
 	  >
-	  <input class="submit" type="submit" value="submit page" />
+	  <input class="submit" type="submit" value="index page" />
 	</form>
 
 	<h3>How to add context to one of your webpages with Citet.net</h3>

@@ -65,8 +65,7 @@
 	<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
 	<h2>a higher standard of citation</h2>
 
-	<!--form action="http://localhost/v0.4/url/text-version" method="GET"-->
-	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET">
+	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET" target="_blank">
 	  <input class="url"
 	  	type="url"
 		name="url"
@@ -78,7 +77,7 @@
 		<option value="\n">break new lines</option>
 	  </select>	
 
-	  <input class="submit" type="submit" value="submit page" />
+	  <input class="submit" type="submit" value="create text-version" />
 	</form>
 
 	<h3>Create a text-version of a webpage</h3>
@@ -88,6 +87,12 @@
     </ul>
 
 	<br /><br />
+
+	<h3>Links:</h3>
+	<ul>
+		<li><a href="https://demo.citeit.net/wp-admin/post-new.php">Create demo post</a></li>
+	</ul>
+
 
 	<h3>What this does:</h3>
 
