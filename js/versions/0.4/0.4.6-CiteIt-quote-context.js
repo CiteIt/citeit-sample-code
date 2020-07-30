@@ -29,10 +29,9 @@ var popup_library = "jQuery";
 // div in footer than holds injected json data, requires css class to hide
 var hidden_container = "citeit_container";
 var webservice_version_num = "0.4";
-var embed_ui = "";
-var embed_url = "";
-var embed_icon = "";
-var embed_html = "";
+var forge_sha256 = ""; // library used to hash key
+var urlParser = "";
+
 
 // Remove anchor from URL
 var current_page_url = window.location.href.split("#")[0];
@@ -59,19 +58,19 @@ jQuery.fn.quoteContext = function() {
       /*************************** Lookup Source and Embed Media **************************/
 
       // Test the URL to see if it is from one of the Supported Media Providers:
-      var media_providers = ["youtube","vimeo","soundcloud"];
+      // var media_providers = ["youtube","vimeo","soundcloud"];
       var url_provider = "";
       console.log("cited_url: " + cited_url);
 
       var url_parsed = urlParser.parse(cited_url);
-      if (!(typeof url_parsed === 'undefined')) {
+      if ((typeof url_parsed !== 'undefined')) {
         if (url_parsed.hasOwnProperty("provider")){
           url_provider = url_parsed.provider;
         }
       }
       if (url_provider == "youtube"){
 	// Generate YouTube Embed URL
-	   embed_url = urlParser.create({
+	   var embed_url = urlParser.create({
 	   videoInfo: {
              provider: url_provider,
              id: url_parsed.id,
@@ -84,9 +83,9 @@ jQuery.fn.quoteContext = function() {
 	});
 
         // Create Embed iframe
-        embed_icon = "<br /><span class='view_on_youtube'>" +
+        var embed_icon = "<br /><span class='view_on_youtube'>" +
                      "Expand: Show Video Clip</span>";
-        embed_html = "<iframe class='youtube' src='" + embed_url +
+        var embed_html = "<iframe class='youtube' src='" + embed_url +
                          "' width='560' height='315' " +
                          "frameborder='0' allowfullscreen='allowfullscreen'>" +
                      "</iframe>";
@@ -125,14 +124,20 @@ jQuery.fn.quoteContext = function() {
       if (cited_url.length > 3){
         var tag_type = jQuery(this)[0].tagName.toLowerCase();
         var hash_key = quoteHashKey(citing_quote, citing_url, cited_url);
-	console.log(hash_key);
-	var hash_value = forge_sha256(hash_key);
-	console.log(hash_value);
+
+		// Javascript uses utf-16.  Convert to utf-8
+		hash_key = encode_utf8(hash_key);
+
+		//alert(hash_key);
+
+		console.log(hash_key);
+		var hash_value = forge_sha256(hash_key);
+		console.log(hash_value);
+
         var shard = hash_value.substring(0,2);
         var read_base = "https://read.citeit.net/quote/";
         var read_url = read_base.concat("sha256/", webservice_version_num, "/",
                        shard, "/", hash_value, ".json");
-        var json = null;
 
         //See if a json summary of this quote was already created
         // and uploaded to the content delivery network
@@ -152,64 +157,6 @@ jQuery.fn.quoteContext = function() {
               }
           });
 
-	// Add Hidden div with context to DOM
-        function addQuoteToDom(tag_type, json, cited_url ) {
-
-          if ( tag_type == "q"){
-            var q_id = "hidden_" + json.sha256;
-
-            //Add content to a hidden div, so that the popup can later grab it
-            jQuery("#" + hidden_container).append(
-              "<div id='" + q_id + "' class='highslide-maincontent'>.. " +
-                json.cited_context_before + " " + " <strong>" +
-                json.citing_quote + "</strong> " +
-                json.cited_context_after + ".. </p>" +
-                "<p><a href='" + json.cited_url +
-                "' target='_blank'>Read more</a> | " +
-                "<a href='javascript:closePopup(" +
-                q_id + ");'>Close</a> </p></div>");
-
-            //Style quote as a link that calls the popup expander:
-            blockcite.wrapInner("<a href='" + blockcite.attr("cite") + "' " +
-              "onclick='return expandPopup(this ,\"" + q_id +"\")' " +
-            " />");
-          }
-          else if (tag_type == "blockquote"){
-			// lookup html for video ui and icon
-             var embed_ui = embedUi(cited_url, json);
-
-			//Fill 'before' and 'after' divs and then quickly hide them
-				blockcite.before("<div id='quote_before_" + json.sha256 + "' class='quote_context'> \
-				<blockquote class='quote_context'>.. <br />" + embed_ui.html + " " + json.cited_context_before + "</blockquote></div> \
-                        ");
-
-			blockcite.after("<div id='quote_after_" + json.sha256 + "' class='quote_context'> \
-				<blockquote class='quote_context'>" + json.cited_context_after + " ..</blockquote></div> \
-				<div class='citeit_source'><span class='citeit_source_label'>source: </span> \
-				<a class='citeit_source_domain' href='" + json.cited_url + "'>" + extractDomain( json.cited_url ) + "</a></div> \
-			");
-
-			var context_before = jQuery("#quote_before_" + json.sha256);
-			var context_after = jQuery("#quote_after_" + json.sha256);
-
-			context_before.hide();
-			context_after.hide();
-
-			if( json.cited_context_before.length > 0){
-			        context_before.before("<div class='quote_arrows' id='context_up_" + json.sha256 + "'> \
-				<a id='quote_arrow_up_" + json.sha256 + "' \
-                     href=\"javascript:toggleQuote('quote_arrow_up', 'quote_before_" + json.sha256 + "');\">&#9650;</a>" + trimDefault(embed_ui.icon) +
-				"</div>"
-				);
-			}
-			if( json.cited_context_after.length > 0){
-			        context_after.after("<div class='quote_arrows' id='context_down_" + json.sha256 +"'> \
-				<a id='quote_arrow_down_" + json.sha256 + "' \
-                                href=\"javascript:toggleQuote('quote_arrow_down', 'quote_after_" + json.sha256 +"');\">&#9660;</a></div>");
-			}
-
-          } // elseif (tag_type == 'blockquote')
-        } // end: function add_quote_to_dom
 
 
       } // if url.length is not blank
@@ -217,6 +164,73 @@ jQuery.fn.quoteContext = function() {
   });     //   jQuery(this).each(function() { : blockquote, or q tag
 
 };
+
+
+
+//#################### Add Hidden div with context to DOM ###################
+    function addQuoteToDom(tag_type, json, cited_url ) {
+	  //var embed_ui = "";
+	  //var embed_url = "";
+	  //var embed_icon = "";
+
+      if ( tag_type == "q"){
+        var q_id = "hidden_" + json.sha256;
+
+        //Add content to a hidden div, so that the popup can later grab it
+        jQuery("#" + hidden_container).append(
+          "<div id='" + q_id + "' class='highslide-maincontent'>.. " +
+            json.cited_context_before + " " + " <span class='q-tag-highlight'><strong>" +
+            json.citing_quote + "</strong></span> " +
+            json.cited_context_after + ".. </p>" +
+            "<p><a href='" + json.cited_url +
+            "' target='_blank'>Read more</a> | " +
+            "<a href='javascript:closePopup(" +
+            q_id + ");'>Close</a> </p></div>");
+
+        //Style quote as a link that calls the popup expander:
+        blockcite.wrapInner("<a href='" + blockcite.attr("cite") + "' " +
+          "onclick='return expandPopup(this ,\"" + q_id +"\")' " +
+        " />");
+      }
+      else if (tag_type == "blockquote"){
+		// lookup html for video ui and icon
+         var embed_ui = embedUi(cited_url, json);
+
+		//Fill 'before' and 'after' divs and then quickly hide them
+		blockcite.before("<div id='quote_before_" + json.sha256 + "' class='quote_context'>" +
+			"<blockquote class='quote_context'>.. <br />" + embed_ui.html + " " + json.cited_context_before + "</blockquote></div>"
+        );
+
+		blockcite.after("<div id='quote_after_" + json.sha256 + "' class='quote_context'>" +
+			"<blockquote class='quote_context'>" + json.cited_context_after + " ..</blockquote></div>" +
+			"<div class='citeit_source'><span class='citeit_source_label'>source: </span>" +
+			"<a class='citeit_source_domain' href='" + json.cited_url + "'>" + extractDomain( json.cited_url ) + "</a></div>"
+		);
+
+		var context_before = jQuery("#quote_before_" + json.sha256);
+		var context_after = jQuery("#quote_after_" + json.sha256);
+
+		context_before.hide();
+		context_after.hide();
+
+		if( json.cited_context_before.length > 0){
+		        context_before.before("<div class='quote_arrows' id='context_up_" + json.sha256 + "'>" +
+				"<a id='quote_arrow_up_" + json.sha256 + "'" +
+                " href=\"javascript:toggleQuote('quote_arrow_up', 'quote_before_" + json.sha256 + "');\">&#9650;</a> " + trimDefault(embed_ui.icon) +
+				"</div>"
+			);
+		}
+		if( json.cited_context_after.length > 0){
+		        context_after.after("<div class='quote_arrows' id='context_down_" + json.sha256 +"'>" +
+				"<a id='quote_arrow_down_" + json.sha256 + "'" +
+                "href=\"javascript:toggleQuote('quote_arrow_down', 'quote_after_" + json.sha256 +"');\">&#9660;</a></div>"
+
+			);
+		}
+
+      } // elseif (tag_type == 'blockquote')
+    } // end: function add_quote_to_dom
+
 
 //********************** Get Nth index position ***************************/
 // Credit: // https://stackoverflow.com/users/80860/kennebec
@@ -250,8 +264,8 @@ function toggleQuote(section, id){
   */
 
   //rotate arrow icons on click
-  let sha = id.split("_")[2];              // 655df86dfb52b7471d842575e72f5223c8d38898ddbf064a22932a5d3f6f23f8
-  let parent_div_id = section + "_" + sha; // context_down_655df86dfb52b7471d842575e72f5223c8d38898ddbf064a22932a5d3f6f23f8
+  var sha = id.split("_")[2];              // 655df86dfb52b7471d842575e72f5223c8d38898ddbf064a22932a5d3f6f23f8
+  var parent_div_id = section + "_" + sha; // context_down_655df86dfb52b7471d842575e72f5223c8d38898ddbf064a22932a5d3f6f23f8
 
   jQuery("#" + parent_div_id).toggleClass("rotated180");    // rotate arrows: flip up or down
   jQuery("#" + id).fadeToggle();
@@ -307,9 +321,11 @@ function closePopup(hidden_popup_id){
 
 //*********** Trim Regex ************
 function trimRegex(str){
-//Source: http://stackoverflow.com/questions/10032024/how-to-remove-leading-and-trailing-white-spaces-from-a-given-html-string
-// Credit:  KhanSharp:  (used for backward compatibility.
-// trim() was introduced in javascript 1.8.1)
+  // Purpose: Backwards-compatible string trim (may not be necessary)
+  // Credit: Jhankar Mahbub:  (used for backward compatibility.
+  // GitHub Profile: https://github.com/khan4019/jhankarMahbub.com
+  // Homepage: http://www.jhankarmahbub.com/
+  // Source: http://stackoverflow.com/questions/10032024/how-to-remove-leading-and-trailing-white-spaces-from-a-given-html-string
   return str.replace(/^[ ]+|[ ]+$/g,"");
 }
 
@@ -348,13 +364,7 @@ function escapeQuote(str){
   //   - TEXT_ESCAPE_CODE_POINTS
 
   var replace_chars = new Set([
-    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
-    , 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 39
-    , 96, 160, 173, 699, 700, 701, 702, 703, 712, 713, 714, 715, 716
-    , 717, 718, 719, 732, 733, 750, 757, 8211, 8212, 8213, 8216, 8217
-    , 8219, 8220, 8221, 8226, 8203, 8204, 8205, 65279, 8232, 8233, 133
-    , 5760, 6158, 8192, 8193, 8194, 8195, 8196, 8197, 8198, 8199, 8200
-    , 8201, 8202, 8239, 8287, 8288, 12288
+    2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 39, 96, 160, 173, 699, 700, 701, 702, 703, 712, 713, 714, 715, 716, 717, 718, 719, 732, 733, 750, 757, 8211, 8212, 8213, 8216, 8217, 8219, 8220, 8221, 8226, 8203, 8204, 8205, 65279, 8232, 8233, 133 , 5760, 6158, 8192, 8193, 8194, 8195, 8196, 8197, 8198, 8199, 8200, 8201, 8202, 8239, 8287, 8288, 12288
   ]);
 
   return normalizeText(str, replace_chars);
@@ -372,11 +382,13 @@ function normalizeText(str, escape_code_points){
   var str_return = '';                //default: empty string
   var input_code_point = -1;
   var str_array = stringToArray(str); // convert string to array
+  var chr = '';
+  var idx = 0;
 
   for (idx in str_array){
     // Get Unicode Code Point of Current Character
     chr = str_array[idx];
-    chr_code = chr.codePointAt(0);
+    var chr_code = chr.codePointAt(0);
     input_code_point = chr.codePointAt(0);
 
     // Only Include this character if it is not in the
@@ -427,15 +439,15 @@ function isInt(data){
       return false;
   }
   else {
-      return true; 
-  } 
+      return true;
+  }
 }
 
 //****************** Text if Hexadecimal format *************
 function isHexadecimal(str){
 // Credit: https://www.w3resource.com/javascript-exercises/javascript-regexp-exercise-16.php
   regexp = /^[0-9a-fA-F]+$/;
-  
+
   if (regexp.test(str))
   {
       return true;
@@ -451,9 +463,10 @@ function stringToArray(s) {
 // Credit: https://medium.com/@giltayar/iterating-over-emoji-characters-the-es6-way-f06e4589516
 // convert string to Array
 
-  const retVal = [];
+  var retVal = [];
+  var ch = '';
 
-  for (const ch of s) {
+  for (ch in s) {
     retVal.push(ch);
   }
   return retVal;
@@ -462,10 +475,11 @@ function stringToArray(s) {
 // **************** Begin: Calculate Video UI ******************
 function embedUi(url, json){
 
-      var media_providers = ["youtube","vimeo","soundcloud"];
+      //var media_providers = ["youtube","vimeo","soundcloud"];
       var url_provider = "";
       var embed_icon = "";
       var embed_html = "";
+	  var embed_url = "";
       var embed_ui = "";
 
       var url_parsed = urlParser.parse(url);
@@ -476,7 +490,7 @@ function embedUi(url, json){
       }
       if (url_provider == "youtube"){
          // Generate YouTube Embed URL
-         var embed_url = urlParser.create({
+         embed_url = urlParser.create({
          videoInfo: {
              provider: url_provider,
              id: url_parsed.id,
@@ -515,12 +529,13 @@ function embedUi(url, json){
           iframe: true
         },
         function(data) {
-           var embed_html = data.html;
+           embed_html = data.html;
         });
 
         embed_icon = "<span class='view_on_youtube'>" +
                       "<br ><a href=\" \">Expand: Show SoundCloud Clip</a></span>";
       }
+
 
       embed_ui.url_provider = url_provider;
       embed_ui.icon = embed_icon;
@@ -557,4 +572,14 @@ function isWordpressPreview(citing_url){
   }
 
   return is_wordpress_preview;
+}
+
+// *************** Convert string to UTF-8 *******************
+
+function encode_utf8( s ) {
+  return unescape( encodeURIComponent( s ) );
+}
+
+function decode_utf8( s ) {
+  return decodeURIComponent( escape( s ) );
 }

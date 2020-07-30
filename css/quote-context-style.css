@@ -29,6 +29,7 @@ div.quote_arrows a, q, q a, span.q, a.citeit_source_domain {
 
 q, q a, span.q {
 	border-bottom: 5px double #0ebfe9;
+	text-decoration: none;
 }
 
 span.q-tag-highlight {
