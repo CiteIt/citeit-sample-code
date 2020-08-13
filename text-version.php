@@ -90,7 +90,7 @@
 
 	<h3>Links:</h3>
 	<ul>
-		<li><a href="https://demo.citeit.net/wp-admin/post-new.php">Create demo post</a></li>
+		<li><a href="https://demo.citeit.net/">Create demo post</a></li>
 	</ul>
 
 
@@ -153,7 +153,7 @@
 	</div>
 
 	<div id="navigation">
-		<a href="https://www.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+		<a href="https://www.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 	</div>
 
 
