@@ -4,14 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CiteIt Examples: Call CiteIt.net Webservice from Php</title>
+
+  <!-- CiteIt Javascript Dependencies
+      - jQuery: manipulate Dom: 
+      - query api.CiteIt.net
+      - download JSON to hidden citeit_container div
+      - add arrows and popup links to q tags and blockquotes
+
+  --- 1) jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"   
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   
+	crossorigin="anonymous">
+  </script>
+
+  <!-- 2) jQuery Migrate: Used to migrate jQuery: https://github.com/jquery/jquery-migrate -->
+  <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js" 
+	integrity="sha256-SOuLUArmo4YXtXONKz+uxIGSKneCJG4x0nVcA0pFzV0=" 
+	crossorigin="anonymous">
+  </script>
+
+  <!-- 3) Generate q-tag Popup -->
+  <script   
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
+	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
+	crossorigin="anonymous">
+  </script> 
+
+  <!-- 4) Calculate JSON Hash values using sha256 library --->
+  <script src='lib/forge-sha256/build/forge-sha256.min.js' defer></script>
+
+  <!-- 5) jsVideoUrlParser: Detect Domain: Determine if an Embed code can be use: YouTube, Vimeo, Soundcloud -->
+  <script src='lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
+
+  <!--CSS Styles: CiteIt & JQuery Popup Window -->
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://www.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
+
+  <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
+  <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
+
+
+  <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
+
+  <!-- Sample Code: Inline Style -->
   <style>
-	body {
-		margin-top: 50px;
-		margin-bottom: 70px;
-		margin-right: 50px;
-		margin-left: 50px;
-		font-size: 125%;
-	} 
+
 	input {
 		font-size: 125%;
 	}
@@ -38,7 +76,7 @@
 		transform: translateY(4px);
 	}
 	input.url {
-		width: 70%;
+		width: 55%;
 	}
 	p.error {
 		color: red;
@@ -62,8 +100,41 @@
 </head>
 <body>
 
-	<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
+
+<div class="wrap">
+	<div class="title-area">
+	<h1 class="site-title" itemprop="headline">
+		<a href="https://www.citeit.net/" title="CiteIt.net">
+		<div class="logo">	
+			<div class="quote_arrows">▲</div>
+			<span class="custom-title">CiteIt.net</span>
+			<div class="quote_arrows">▼</div>
+		</div>
+		</a>
+	</h1>
+	</div>
+</div>
+
+<div class="site-tagline">
 	<h2>a higher standard of citation</h2>
+</div>
+
+<ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
+<li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="https://www.citeit.net/wordpress-plugin/"><span >wordpress plugin</span></a></li>
+<li id="menu-item-2198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2198"><a href="https://www.citeit.net/wikipedia/"><span >Wikipedia Project</span></a></li>
+<li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
+
+<li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
+
+<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/volunteer/"><span >Volunteer</span></a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://www.citeit.net/blog/"><span >Blog</span></a></li>
+<li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
+</ul>
+
+<div class="wrap">
+
+<h3 class="breadcrumb"><a href="https://www.citeit.net/code/">Code</a> &gt; <a href="https://www.citeit.net/sample-code/">Sample Code</a> : Text Version</h3>
+
 
 	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET" target="_blank">
 	  <input class="url"
@@ -151,6 +222,8 @@
 			can be added to a website with a WordPress plugin or a bit of custom code.
 		</p>
 	</div>
+
+</div><!--wrap-->
 
 	<div id="navigation">
 		<a href="https://www.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>

@@ -60,6 +60,8 @@ function print_json_files($path){
 	print("</ul>");
   }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
@@ -67,66 +69,86 @@ function print_json_files($path){
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CiteIt Examples: Call CiteIt.net Webservice from Php</title>
-  <style>
-	body {
-		margin-top: 50px;
-		margin-bottom: 70px;
-		margin-right: 50px;
-		margin-left: 50px;
-		font-size: 125%;
-	} 
-	input {
-		font-size: 125%;
-	}
-	input.submit {
-		display: inline-block;
-		padding: 15px 25px;
-		font-size: 24px;
-		cursor: pointer;
-		text-align: center;
-		text-decoration: none;
-		outline: none;
-		color: #fff;
-		background-color: #444;
-		border: none;
-		border-radius: 15px;
-		box-shadow: 0 9px #999;
-	}
-	input.submit:hover {
-		background-color: #666
-	}
-	input.submit:active {
-		background-color: #3e8e41;
-		box-shadow: 0 5px #666;
-		transform: translateY(4px);
-	}
-	input.url {
-		width: 70%;
-	}
-	p.error {
-		color: red;
-		font-weight: 800;
-	}
-	div#list_citations {
-		margin-top: 200px;
-	}
-	div#footer {
-		margin-top: 70px;
-		background-color: #ddd;
-		border: 1px solid #bbb;
-		padding: 30px 50px;
-	}
-	div#navigation {
-		margin-top: 60px;
-	}
-	
-  </style>
+
+  <!-- CiteIt Javascript Dependencies
+      - jQuery: manipulate Dom: 
+      - query api.CiteIt.net
+      - download JSON to hidden citeit_container div
+      - add arrows and popup links to q tags and blockquotes
+
+  --- 1) jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"   
+	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   
+	crossorigin="anonymous">
+  </script>
+
+  <!-- 2) jQuery Migrate: Used to migrate jQuery: https://github.com/jquery/jquery-migrate -->
+  <script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js" 
+	integrity="sha256-SOuLUArmo4YXtXONKz+uxIGSKneCJG4x0nVcA0pFzV0=" 
+	crossorigin="anonymous">
+  </script>
+
+  <!-- 3) Generate q-tag Popup -->
+  <script   
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
+	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
+	crossorigin="anonymous">
+  </script> 
+
+  <!-- 4) Calculate JSON Hash values using sha256 library --->
+  <script src='lib/forge-sha256/build/forge-sha256.min.js' defer></script>
+
+  <!-- 5) jsVideoUrlParser: Detect Domain: Determine if an Embed code can be use: YouTube, Vimeo, Soundcloud -->
+  <script src='lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
+
+  <!--CSS Styles: CiteIt & JQuery Popup Window -->
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://www.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
+
+  <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
+  <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
+
+
+  <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
+
 
 </head>
 <body>
 
-	<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
+<div class="wrap">
+	<div class="title-area">
+	<h1 class="site-title" itemprop="headline">
+		<a href="https://www.citeit.net/" title="CiteIt.net">
+		<div class="logo">	
+			<div class="quote_arrows">▲</div>
+			<span class="custom-title">CiteIt.net</span>
+			<div class="quote_arrows">▼</div>
+		</div>
+		</a>
+	</h1>
+	</div>
+</div>
+
+<div class="site-tagline">
 	<h2>a higher standard of citation</h2>
+</div>
+
+<ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
+<li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="https://www.citeit.net/wordpress-plugin/"><span >wordpress plugin</span></a></li>
+<li id="menu-item-2198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2198"><a href="https://www.citeit.net/wikipedia/"><span >Wikipedia Project</span></a></li>
+<li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
+
+<li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
+
+<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/volunteer/"><span >Volunteer</span></a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://www.citeit.net/blog/"><span >Blog</span></a></li>
+<li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
+</ul>
+
+<div class="wrap">
+
+<h3 class="breadcrumb"><a href="https://www.citeit.net/code/">Code</a> &gt; <a href="https://www.citeit.net/sample-code/">Sample Code</a></h3>
 
 
 	<form action="" method="POST">
@@ -142,21 +164,29 @@ function print_json_files($path){
 	<h3>How to add context to one of your webpages with Citet.net</h3>
 
     <ol>
-        <li>Mark up your page by adding a blockquote or q tag with a "cite" tag</li>
-        <li>Add the CiteIt javascript to your page template (see <a href="https://github.com/CiteIt/citeit-examples">example code</a>)</li>
-        <li>Submit the URL of your page to be indexed (above).</li>
-        <li>Reload your page.</li>
+        <li>Mark up your page by <b>adding a blockquote</b> or q tag with a <b>"cite" tag</b>: 
+			<ul><li>&lt;blockquote cite='http://avalon.law.yale.edu/19th_century/jeffauto.asp'&gt;sample quote&lt;blockquote&gt;</li></ul>
+
+	    </li>
+        <li>Add the CiteIt.net <b>javascript</b> to your page template (see <a href="https://github.com/CiteIt/citeit-sample-code/blob/master/examples.html">example code</a>)</li>
+        <li>Submit the URL of your page to be indexed (above).  This will <b>create one JSON file for each quote</b> on the page. (<a href="https://read.citeit.net/quote/sha256/0.4/d5/d588c1c9c4acfcd254acc4033b7888e98f21e426214b21f0e07673664e328e39.json">sample JSON file</a>)</li>
+        <li><b>Reload</b> your page to pull in the newly created JSON file/s.</li>
     </ol>
 
 	<h3>What this does</h3>
-
-    <p>
-       This will retreive the 500 characters of context
+	<ol>
+    <li>
+       This will retreive the <b>500 characters of context</b>
 	   before and after your quotation and store it in a JSON snippet.
-	</p>
+	</li>
 
-    <p>When you reload your page, the javascript will pull in the context from the
-    newly-created JSON snippet.</p>
+    <li>When you <b>reload</b> your page, the javascript will <b>pull in the context</b> from the
+    newly-created JSON snippet.</li>
+
+	<li>This <i>index.php</i> script makes a <i>POST</i> request to the <a href="http://api.citeit.net/">api.citeit.net web service</a> and <b>saves a copy</b> of the JSON to a local folder: <b><a href="CiteIt.net_json/">CiteIt.net_json</a></b> 
+		<ul><li>(you need to set <b>write permissions</b> for this folder)</li></ul>
+
+	</ol>
 
 
 	<?php
@@ -173,7 +203,8 @@ function print_json_files($path){
 	?>
 	</div>
 
-	<!---------------------- Display API Methods ----------------------->
+<!---------------------- Begin: Main Content ----------------------->
+
 	<h3>API Examples</h3>
 	<ul>
 		<li>Submit a URL for Indexing: (POST-preferred)
@@ -206,8 +237,8 @@ function print_json_files($path){
 		</li>
 	</ul>
 
-	<!---------------------- End: Display API Methods ----------------------->
-
+  </div><!--wrap-->
+<!---------------------- End: Main Content ----------------------->
 
 	<div id="footer">
 		<p><b>What:</b> <a href="https://www.citeit.net/">CiteIt.net</a> is a citation tool that 
@@ -219,8 +250,9 @@ function print_json_files($path){
 		</p>
 	</div>
 
+
 	<div id="navigation">
-		<b>New Submission</b> | <a href="examples.html">Examples</a> | <a href="https://www.citeit.net/sample-code/text-version.php">Text-Version</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+		<b>New Submission</b> | <a href="examples.html">Examples</a> | <a href="https://www.citeit.net/sample-code/text-version.php">Text-Version</a> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 	</div>
 
 

@@ -39,39 +39,55 @@
   <!--CSS Styles: CiteIt & JQuery Popup Window -->
   <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://www.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
 
   <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
   <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
 
-  <!-- Sample Code: Inline Style -->
-  <style>
-	body {
-		margin-top: 50px;
-		margin-bottom: 70px;
-		margin-right: 50px;
-		margin-left: 50px;
-		width: 700px;
-		font-size: 125%;
-	} 
-	div.quote {
-		width: 500px;
-	}
-	div#navigation {
-		margin-top: 60px;
 
-	div#instructions {
-		background-color: #eee;
-		border: 1px solid #aaa;
-		padding: 0 20px 20px 20px;
+  <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
 
-	}
-  </style>
 
 </head>
 <body>
 
-<h1><a href="https://www.citeit.net/">CiteIt.net</a></h1>
-<h2>a higher standard of citation</h2>
+<div class="wrap">
+	<div class="title-area">
+	<h1 class="site-title" itemprop="headline">
+		<a href="https://www.citeit.net/" title="CiteIt.net">
+		<div class="logo">	
+			<div class="quote_arrows">▲</div>
+			<span class="custom-title">CiteIt.net</span>
+			<div class="quote_arrows">▼</div>
+		</div>
+		</a>
+	</h1>
+	</div>
+</div>
+
+<div class="site-tagline">
+	<h2>a higher standard of citation</h2>
+</div>
+
+<ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
+<li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="https://www.citeit.net/wordpress-plugin/"><span >wordpress plugin</span></a></li>
+<li id="menu-item-2198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2198"><a href="https://www.citeit.net/wikipedia/"><span >Wikipedia Project</span></a></li>
+<li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
+
+<li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
+
+<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/volunteer/"><span >Volunteer</span></a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://www.citeit.net/blog/"><span >Blog</span></a></li>
+<li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
+</ul>
+
+<div class="wrap">
+
+<h3 class="breadcrumb"><a href="https://www.citeit.net/code/">Code</a> &gt; <a href="https://www.citeit.net/sample-code/">Sample Code</a> : Examples</h3>
+
+<!---------------------- Begin: Main Content ----------------------->
+
+
 
 <div id="instructions">
 
@@ -84,7 +100,7 @@
   <li>Upload this file to a public website</li>
   <li>Submit this page's URL using the <a href="https://www.citeit.net/sample-code/">Submission Page</a></li>
   <li>This will generate <a href="https://read.citeit.net/quote/sha256/0.4/41/4174a04d8a3fc6b30596b940f5264e9a0dfe22cced9070c9cb9c644a17a451da.json">JSON files</a> for each quote.</li>
-  <li>You can view the JSON files for this page in your <a href="https://www.citeit.net/wp-content/uploads/2020/06/CiteIt.net-Chrome-Inspect.png">browser's developer mode</a>.</li>
+  <li>You can view the JSON files for this page in your <a href="https://www.citeit.net/wp-content/uploads/2020/10/CiteIt-Inspect-Chrome-Developer-mode.png">browser's developer mode</a>.</li>
 </ul>
 </div>
 
@@ -131,6 +147,11 @@ In a medium.com article, <a href="https://medium.com/conversations-with-tyler/ra
  </li>
 </ul>
 
+
+</div><!--wrap-->
+
+<!---------------------- End: Main Content ----------------------->
+
 <div id="navigation">
 	<a href="./">New Submission</a> | <b>Examples</b> | <a href="https://www.citeit.net/sample-code/text-version.php">Text-Version</a> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 </div>
@@ -142,6 +163,7 @@ In a medium.com article, <a href="https://medium.com/conversations-with-tyler/ra
 		jQuery('q, blockquote').quoteContext();
 	});
   </script>
+
 
 </body>
 </html>
