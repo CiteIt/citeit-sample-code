@@ -101,17 +101,14 @@ jQuery.fn.quoteContext = function() {
                 // Add Hidden div with context to DOM
                 function addQuoteToDom(tag_type, json, cited_url) {
 
-                    // lookup html for video ui and icon
-                    var embed_ui = embedUi(cited_url, json, tag_type);
-
                     if (tag_type === "q") {
                         var q_id = "hidden_" + json.sha256;
                         var url_cited_domain = json.cited_url.replace('http://','').replace('https://','').replace('www.','').split(/[/?#]/)[0];
 
+
                         //Add content to a hidden div, so that the popup can later grab it
                         jQuery("#" + hidden_container).append(
-                            "<div id='" + q_id + "' class='highslide-maincontent xx'>" + 
-                            embed_ui.html + "<br />.. " + 
+                            "<div id='" + q_id + "' class='highslide-maincontent'>.. " +
                             json.cited_context_before + " " + " <span class='q-tag-highlight'><strong>" +
                             json.citing_quote + "</strong></span> " +
                             json.cited_context_after + ".. </p>" +
@@ -126,6 +123,8 @@ jQuery.fn.quoteContext = function() {
                             "onclick='return expandPopup(this ,\"" + q_id + "\")' " +
                             " />");
                     } else if (tag_type === "blockquote") {
+                        // lookup html for video ui and icon
+                        var embed_ui = embedUi(cited_url, json);
 
                         //Fill 'before' and 'after' divs and then quickly hide them
                         blockcite.before("<div id='quote_before_" + json.sha256 + "' class='quote_context'>"
@@ -423,7 +422,7 @@ function stringToArray(s) {
 }
 
 // **************** Begin: Calculate Video UI ******************
-function embedUi(url, json, tag_type = 'blockquote') {
+function embedUi(url, json) {
 
     var media_providers = ["youtube", "vimeo", "soundcloud"];
     var url_provider = "";
@@ -437,10 +436,6 @@ function embedUi(url, json, tag_type = 'blockquote') {
         }
     }
     if (url_provider == "youtube") {
-        // Nested Object with potential null property
-        //   *  https://dev.to/flexdinesh/accessing-nested-objects-in-javascript--9m4#:~:text=Oliver%20Steele's%20Nested,how%20it%20works.
-        start_time = ((url_parsed || {}).params || {}).start && 0;
-
         // Generate YouTube Embed URL
         var embed_url = urlParser.create({
             videoInfo: {
@@ -450,7 +445,7 @@ function embedUi(url, json, tag_type = 'blockquote') {
             },
             format: "embed",
             params: {
-                start: start_time
+                start: url_parsed.params.start
             }
         });
 
@@ -458,17 +453,8 @@ function embedUi(url, json, tag_type = 'blockquote') {
         embed_icon = "<span class='view_on_youtube'>" +
             "<br /><a href=\"javascript:toggleQuote('quote_arrow_up', 'quote_before_" + json.sha256 + "');\">Expand: Show Video Clip</a></span>";
 
-		if (tag_type == 'q'){
-			width = '426';
-			height = '240';
-		}
-		else {
-			width = '560';
-			height = '315';
-		}
-
         embed_html = "<iframe class='youtube' src='" + embed_url +
-            "' width='" + width + "' height='" + height + "' " +
+            "' width='560' height='315' " +
             "frameborder='0' allowfullscreen='allowfullscreen'>" +
             "</iframe>";
 

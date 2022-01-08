@@ -110,7 +110,7 @@ jQuery.fn.quoteContext = function() {
 
                         //Add content to a hidden div, so that the popup can later grab it
                         jQuery("#" + hidden_container).append(
-                            "<div id='" + q_id + "' class='highslide-maincontent xx'>" + 
+                            "<div id='" + q_id + "' class='highslide-maincontent'>" + 
                             embed_ui.html + "<br />.. " + 
                             json.cited_context_before + " " + " <span class='q-tag-highlight'><strong>" +
                             json.citing_quote + "</strong></span> " +
@@ -437,10 +437,12 @@ function embedUi(url, json, tag_type = 'blockquote') {
         }
     }
     if (url_provider == "youtube") {
-        // Nested Object with potential null property
-        //   *  https://dev.to/flexdinesh/accessing-nested-objects-in-javascript--9m4#:~:text=Oliver%20Steele's%20Nested,how%20it%20works.
-        start_time = ((url_parsed || {}).params || {}).start && 0;
-
+		
+        var start_time = '';
+        if (typeof url_parsed.params.start !== 'undefined'){
+          start_time = url_parsed.params.start;
+        }
+			
         // Generate YouTube Embed URL
         var embed_url = urlParser.create({
             videoInfo: {
