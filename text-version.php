@@ -37,7 +37,7 @@
   <script src='lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
 
   <!--CSS Styles: CiteIt & JQuery Popup Window -->
-  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://www.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://pages.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
   <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
   <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
 
@@ -120,20 +120,18 @@
 </div>
 
 <ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
-<li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="https://www.citeit.net/wordpress-plugin/"><span >wordpress plugin</span></a></li>
-<li id="menu-item-2198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2198"><a href="https://www.citeit.net/wikipedia/"><span >Wikipedia Project</span></a></li>
 <li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
 
 <li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
 
-<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/volunteer/"><span >Volunteer</span></a></li>
-<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://www.citeit.net/blog/"><span >Blog</span></a></li>
+<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/code/?tab=volunteer"><span >Volunteer</span></a></li>
+<li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://pages.citeit.net/"><span >Blog</span></a></li>
 <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
 </ul>
 
 <div class="wrap">
 
-<h3 class="breadcrumb"><a href="https://www.citeit.net/code/">Code</a> &gt; <a href="https://www.citeit.net/sample-code/">Sample Code</a> : Text Version</h3>
+<h3 class="breadcrumb"><a href="https://pages.citeit.net/code/">Code</a> &gt; <a href="https://pages.citeit.net/sample-code/">Sample Code</a> : Text Version</h3>
 
 
 	<form action="http://api.citeit.net/v0.4/url/text-version" method="GET" target="_blank">
@@ -182,28 +180,28 @@
 	<ul>
 		<li>Submit a URL for Indexing: (POST-preferred)
 			<ul>
-			<li><a rel="nofollow" href="http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html">http://api.citeit.net/v0.4/url/?url=https://www.citeit.net/sample-code/examples.html</a>
+			<li><a rel="nofollow" href="https://api.citeit.net/v0.4/url/?url=https://pages.citeit.net/sample-code/examples.html">https://api.citeit.net/v0.4/url/?url=https://pages.citeit.net/sample-code/examples.html</a>
 			</li>
 			</ul>
 		</li>
 
 		<li>Text version of URL: (html only, PDF version desired)
 			<ul>
-			<li><a rel="nofollow" href="http://api.citeit.net/v0.4/url/text-version?url=https://www.citeit.net/sample-code/examples.html">http://api.citeit.net/v0.4/url/text-version?url=https://www.citeit.net/sample-code/examples.html</a>
+			<li><a rel="nofollow" href="https://api.citeit.net/v0.4/url/text-version?url=https://pages.citeit.net/sample-code/examples.html">https://api.citeit.net/v0.4/url/text-version?url=https://pages.citeit.net/sample-code/examples.html</a>
 			</li>
 			</ul>
 		</li>
 
 		<li>Quote Hashkeys of URL:
 			<ul>
-			<li><a rel="nofollow" href="http://api.citeit.net/v0.4/url/hashkeys?url=https://www.citeit.net/sample-code/examples.html">http://api.citeit.net/v0.4/url/hashkeys?url=https://www.citeit.net/sample-code/examples.html</a>
+			<li><a rel="nofollow" href="https://api.citeit.net/v0.4/url/hashkeys?url=https://pages.citeit.net/sample-code/examples.html">https://api.citeit.net/v0.4/url/hashkeys?url=https://pages.citeit.net/sample-code/examples.html</a>
 			</li>
 			</ul>
 		</li>
 
 		<li>Canonical URL: get preferred url
 			<ul>
-			<li><a rel="nofollow" href="http://api.citeit.net/v0.4/url/canonical-url?url=https://www.citeit.net/sample-code/examples.html%3Fsearch=test-querystring">http://api.citeit.net/v0.4/url/canonical-url?url=https://www.citeit.net/sample-code/examples.html?search=test-querystring</a>
+			<li><a rel="nofollow" href="https://api.citeit.net/v0.4/url/canonical-url?url=https://pages.citeit.net/sample-code/examples.html%3Fsearch=test-querystring">https://api.citeit.net/v0.4/url/canonical-url?url=https://pages.citeit.net/sample-code/examples.html?search=test-querystring</a>
 			</li>
 			</ul>
 		</li>
@@ -214,11 +212,11 @@
 
 	<div id="list_citations">
 	<div id="footer">
-		<p><b>What:</b> <a href="https://www.citeit.net/">CiteIt.net</a> is a citation tool that 
+		<p><b>What:</b> <a href="https://pages.citeit.net/">CiteIt.net</a> is a citation tool that 
 			<b>enables web authors to demonstrate the context</b> of their citations.
 		</p>
 		<p><b>Who:</b> CiteIt.net allows journalists, academics and web authors who want to set a higher standard of discourse.</p>
-		<p><b>How:</b> CiteIt.net is an <a href="https://www.citeit.net/code/">open source program</a> which 
+		<p><b>How:</b> CiteIt.net is an <a href="https://pages.citeit.net/code/">open source program</a> which 
 			can be added to a website with a WordPress plugin or a bit of custom code.
 		</p>
 	</div>
@@ -226,7 +224,7 @@
 </div><!--wrap-->
 
 	<div id="navigation">
-		<a href="https://www.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+		<a href="https://pages.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 	</div>
 
 
