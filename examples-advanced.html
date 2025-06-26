@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CiteIt.net Code Examples</title>
 
-  <!-- CiteIt Javascript Dependencies
+
+<!-- ############################### Begin: CiteIt Dependencies ##################################
       - jQuery: manipulate Dom: 
       - query api.CiteIt.net
       - download JSON to hidden citeit_container div
       - add arrows and popup links to q tags and blockquotes
 
-  --- 1) jQuery -->
+  ------ 1) jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"   
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   
 	crossorigin="anonymous">
@@ -28,38 +29,47 @@
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
 	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
 	crossorigin="anonymous">
-  </script> 
+  </script>
 
   <!-- 4) Calculate JSON Hash values using sha256 library --->
-  <script src='lib/forge-sha256/build/forge-sha256.min.js' defer></script>
+  <script src='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/forge-sha256/forge/forge-sha256.min.js' defer></script>
 
   <!-- 5) jsVideoUrlParser: Detect Domain: Determine if an Embed code can be use: YouTube, Vimeo, Soundcloud -->
-  <script src='lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
+  <script src='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
 
   <!--CSS Styles: CiteIt & JQuery Popup Window -->
-  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://pages.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
-  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
-  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
+  <link rel='stylesheet' href='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
+  <link rel='stylesheet' href='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/css/CiteIt-library.css' type='text/css' media='all' />
+
+  <link rel='stylesheet' href='/assets/css/citeit-wikipedia.css' type='text/css' media='all' />
 
   <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
-  <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
+  <script src='https://www.citeit.net/assets/js/citeit/CiteIt-quote-context.js'> </script>
+
+<!-- ############################### End: CiteIt.net Dependencies #######################################-->
 
 
   <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
 
   <!-- Sample Code: Inline Style -->
   <style>
+	body {
+		margin: 0 15% 0 15%;
+	}
 	div.quote {
 		width: 500px;
 	}
 	div#navigation {
 		margin-top: 60px;
-
+	}
 	div#instructions {
 		background-color: #eee;
 		border: 1px solid #aaa;
 		padding: 0 20px 20px 20px;
 
+	}
+	.site-tagline {
+		margin: 0 auto;
 	}
   </style>
 
@@ -71,9 +81,9 @@
 	<h1 class="site-title" itemprop="headline">
 		<a href="https://www.citeit.net/" title="CiteIt.net">
 		<div class="logo">	
-			<div class="quote_arrows">▲</div>
+			<!--div class="quote_arrows">▲</div-->
 			<span class="custom-title">CiteIt.net</span>
-			<div class="quote_arrows">▼</div>
+			<!--div class="quote_arrows">▼</div-->
 		</div>
 		</a>
 	</h1>
@@ -81,7 +91,7 @@
 </div>
 
 <div class="site-tagline">
-	<h2>a higher standard of citation</h2>
+	<h2>standard of citation</h2>
 </div>
 
 <ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
@@ -139,7 +149,7 @@ In a medium.com article, <a href="https://medium.com/conversations-with-tyler/ra
 	data-citeit-cited-series-youtube="https://www.youtube.com/playlist?list=PLS8aEHTqDvpInY9kslUOOK8Qj_-B91o_W" 
 	data-citeit-cited-authors_names="David Wolpe, Tyler Cowen" 
 	data-citeit-cited-authors_twitter="@RabbiWolpe, @tylercowen" 
-	data-citeit-cited-authors-wikipedia-urls="https://en.wikipedia.org/wiki/David_Wolpe, https://en.wikipedia.org/wiki/Tyler_Cowen">I think that Judaism has the same problem that any thick civilization has in a world in which, as you say, <strong>context is stripped away</strong>. And not only is context stripped away, but attention to any one thing is scanter and less than it used to be.</blockquote>
+	data-citeit-cited-authors-wikipedia-urls="https://en.wikipedia.org/wiki/David_Wolpe, https://en.wikipedia.org/wiki/Tyler_Cowen">I think that Judaism has the same problem that any thick civilization has in a world in which, as you say, context is stripped away. And not only is context stripped away, but attention to any one thing is scanter and less than it used to be.</blockquote>
 
 <p>You can mark up the quote with <b>html tags</b> such as &lt;ul&gt;, &lt;li&gt;, &lt;b&gt; or any other <b>tag that will not change the text version</b> of the quote when the hmtl is converted to text.</p>
 
@@ -265,6 +275,11 @@ The Crime Machine
 
 
 In <a href="https://apps.oyez.org/player/#fb-root:~:text=The%20government%20silences%20a%20corporate%20objector%2C,are%20silencing%20them%20during%20the%20election.">Citizens United vs FEC</a>, Justice Anthony Kennedy expressed his concern that the valuable knowledge of corporations would be suppressed by a ban on corporate campagin funding.
+
+
+<p>Note: The script that parses the oyez.org site is broken.</p>
+
+
 <blockquote cite="https://apps.oyez.org/player/#/roberts2/oral_argument_audio/22476"
 	data-citeit-cited_audio_url='https://s3.amazonaws.com/oyez.case-media.ogg/case_data/2008/08-205/20090909r_08-205.ogg'
 	data-citeit-cited_audio_start_time='3433'
