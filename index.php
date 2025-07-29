@@ -69,7 +69,7 @@ function print_json_files($path){
 <head >
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CiteIt Examples: Call CiteIt.net Webservice from Php</title>
+  <title>CiteIt.net Code Examples</title>
 
   <!-- CiteIt Javascript Dependencies
       - jQuery: manipulate Dom: 
@@ -110,7 +110,6 @@ function print_json_files($path){
   <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
   <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
 
-
   <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
 
 
@@ -132,7 +131,7 @@ function print_json_files($path){
 </div>
 
 <div class="site-tagline">
-	<h2>a higher standard of citation</h2>
+	<h2>building trust in media</h2>
 </div>
 
 <ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
@@ -140,7 +139,6 @@ function print_json_files($path){
 
 <li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
 
-<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/code/?tab=volunteer"><span >Volunteer</span></a></li>
 <li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://pages.citeit.net/"><span >Blog</span></a></li>
 <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
 </ul>
@@ -247,15 +245,39 @@ function print_json_files($path){
 			<b>enables web authors to demonstrate the context</b> of their citations.
 		</p>
 		<p><b>Who:</b> CiteIt.net allows journalists, academics and web authors who want to set a higher standard of discourse.</p>
-		<p><b>How:</b> CiteIt.net is an <a href="https://pages.citeit.net/code/">open source program</a> which 
-			can be added to a website with a WordPress plugin or a bit of custom code.
-		</p>
+		<p><b>How:</b> CiteIt.net can be added to a website with a WordPress plugin or a bit of custom code.</p>
 	</div>
 
 
 	<div id="navigation">
-		<b>New Submission</b> | <a href="examples.html">Examples</a> | <a href="https://pages.citeit.net/sample-code/text-version.php">Text-Version</a> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+		<b>New Submission</b> | <a href="examples.html">Examples</a> | <a href="examples-advanced.html">Advanced Examples</a> | <a href="https://pages.citeit.net/sample-code/text-version.php">Text-Version</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 	</div>
+
+
+
+<div id='citeit_container'><!-- CiteIt-quote-context.js injects data returned from lookup in this hidden div --></div>
+
+<script>
+
+  // Default Base URL to current URL (www.citeit.net or localhost:8080 )
+  citing_url = document.getElementById('citing_url');
+  if(citing_url != null){
+    document.getElementById('citing_url').value = window.location.href;
+  }
+  
+  // Call CiteIt.net plugin on all q-tags and blockquotes:
+  jQuery(document).ready(function(){
+
+      jQuery('q, blockquote').quoteContext();
+
+      // Highlight YouTube Expansion
+      setTimeout(function(){
+        jQuery("span.view_on_youtube").addClass("highlight");
+      }, 1000);
+
+  });
+
+</script>
 
 
 </body>

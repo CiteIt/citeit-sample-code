@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CiteIt.net Code Examples</title>
 
-
-<!-- ############################### Begin: CiteIt Dependencies ##################################
+  <!-- CiteIt Javascript Dependencies
       - jQuery: manipulate Dom: 
       - query api.CiteIt.net
       - download JSON to hidden citeit_container div
       - add arrows and popup links to q tags and blockquotes
 
-  ------ 1) jQuery -->
+  --- 1) jQuery -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js"   
 	integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   
 	crossorigin="anonymous">
@@ -29,49 +28,24 @@
 	src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"   
 	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="   
 	crossorigin="anonymous">
-  </script>
+  </script> 
 
   <!-- 4) Calculate JSON Hash values using sha256 library --->
-  <script src='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/forge-sha256/forge/forge-sha256.min.js' defer></script>
+  <script src='lib/forge-sha256/build/forge-sha256.min.js' defer></script>
 
   <!-- 5) jsVideoUrlParser: Detect Domain: Determine if an Embed code can be use: YouTube, Vimeo, Soundcloud -->
-  <script src='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
+  <script src='lib/jsVideoUrlParser/dist/jsVideoUrlParser.min.js' defer></script>
 
   <!--CSS Styles: CiteIt & JQuery Popup Window -->
-  <link rel='stylesheet' href='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
-  <link rel='stylesheet' href='https://www.citeit.net/assets/wordpress/plugins/CiteIt.net/css/CiteIt-library.css' type='text/css' media='all' />
-
-  <link rel='stylesheet' href='/assets/css/citeit-wikipedia.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='https://pages.citeit.net/wp-content/plugins/CiteIt.net/lib/jquery-ui-1.12.1/jquery-ui.min.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/quote-context-style.css' type='text/css' media='all' />
+  <link rel='stylesheet' id='wp-bigfoot-public-css'  href='css/sample.css' type='text/css' media='all' />
 
   <!-- 6) Main CiteIt Javascript Code: Download JSON & Create Popup windows and Expanding Arrows  -->
-  <script src='https://www.citeit.net/assets/js/citeit/CiteIt-quote-context.js'> </script>
-
-<!-- ############################### End: CiteIt.net Dependencies #######################################-->
-
+  <script src='js/versions/0.4/CiteIt-quote-context.js' defer></script>
 
   <link rel='stylesheet' id='minimum-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRoboto+Slab%3A300%2C400&#038;ver=3.0.1' type='text/css' media='all' />
 
-  <!-- Sample Code: Inline Style -->
-  <style>
-	body {
-		margin: 0 15% 0 15%;
-	}
-	div.quote {
-		width: 500px;
-	}
-	div#navigation {
-		margin-top: 60px;
-	}
-	div#instructions {
-		background-color: #eee;
-		border: 1px solid #aaa;
-		padding: 0 20px 20px 20px;
-
-	}
-	.site-tagline {
-		margin: 0 auto;
-	}
-  </style>
 
 </head>
 <body>
@@ -81,9 +55,9 @@
 	<h1 class="site-title" itemprop="headline">
 		<a href="https://www.citeit.net/" title="CiteIt.net">
 		<div class="logo">	
-			<!--div class="quote_arrows">▲</div-->
+			<div class="quote_arrows">▲</div>
 			<span class="custom-title">CiteIt.net</span>
-			<!--div class="quote_arrows">▼</div-->
+			<div class="quote_arrows">▼</div>
 		</div>
 		</a>
 	</h1>
@@ -91,17 +65,14 @@
 </div>
 
 <div class="site-tagline">
-	<h2>standard of citation</h2>
+	<h2>building trust in media</h2>
 </div>
 
 <ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
-<li id="menu-item-426" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-426"><a href="https://pages.citeit.net/wordpress-plugin/"><span >wordpress plugin</span></a></li>
-<li id="menu-item-2198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2198"><a href="https://pages.citeit.net/wikipedia/"><span >Wikipedia Project</span></a></li>
 <li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
 
 <li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
 
-<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/code/?tab=volunteer"><span >Volunteer</span></a></li>
 <li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://pages.citeit.net/"><span >Blog</span></a></li>
 <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
 </ul>
@@ -121,6 +92,11 @@
   <li>You can view the JSON files for this page in your <a href="https://pages.citeit.net/wp-content/uploads/2020/06/CiteIt.net-Chrome-Inspect.png">browser's developer mode</a>.</li>
 </ul>
 </div>
+
+
+<br />
+<iframe width="854" height="480" src="https://www.youtube.com/embed/FevZN91uq4c" title="A Tutorial for Developers  How the CiteIt net Code Works" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 
 <h2>Examples</h2>
@@ -155,14 +131,17 @@ In a medium.com article, <a href="https://medium.com/conversations-with-tyler/ra
 
 
 <h3>3: YouTube Video: Malcolm Gladwell: Crime Show Taxonomy</h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wsza7NZbP6U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<a href="https://pages.citeit.net/2020/08/07/citing-youtube-videos-with-expanding-context/">video transcript</a><br /><br />
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Okg2LH6XKzY?t" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br /><a href="https://pages.citeit.net/2020/08/07/citing-youtube-videos-with-expanding-context/">video transcript</a><br /><br />
 
 <p>When you <a href="https://pages.citeit.net/2020/08/07/quoting-youtube-transcripts-with-citeit-net/">cite a <b>YouTube video</b></a>, in addition to looking up the 500 characters of <b>transcript context</b>,  
 CiteIt's WordPress Plugin embeds a hidden <b>iframe</b>, starting at the video's <b>start time</b> 
 if you include the time offset in your link.</p>
 
-<blockquote cite="https://youtu.be/OnEjzmR9Hvw?t=231">
+
+
+<blockquote cite="https://youtu.be/Okg2LH6XKzY?t=8770">
 <ol>
 <li>a <b>Western</b> is where is conceptually a
 world in which <b>there is no law and order</b>
@@ -268,61 +247,40 @@ The Crime Machine
 
 
 
-<h3>5: Quoting the Supreme Court: Javascript API</h3>
-<p>Here's an example of a site that is not a normal html site, but rather the page the reader visits is <b>generated from javascript</b>.  A <a href="https://github.com/CiteIt/citeit-webservice/blob/master/app/lib/citeit_quote_context/document.py#LC664:~:text=def%20oyez_transcript(public_url)%3A,%23">site-specific adaptor for the Document class</a> generates the transcript from a <a href="https://api.oyez.org/case_media/oral_argument_audio/24995">javascript API</a>.
-
-<p>In the future, it would be nice to <b>embeded an audio player</b> similar to the one used on the oyez site, which plays the audio when a transcript line is clicked on.  This would require createing a data format which maps transcript text to it's corresponding time.</p>
-
-
-In <a href="https://apps.oyez.org/player/#fb-root:~:text=The%20government%20silences%20a%20corporate%20objector%2C,are%20silencing%20them%20during%20the%20election.">Citizens United vs FEC</a>, Justice Anthony Kennedy expressed his concern that the valuable knowledge of corporations would be suppressed by a ban on corporate campagin funding.
-
-
-<p>Note: The script that parses the oyez.org site is broken.</p>
-
-
-<blockquote cite="https://apps.oyez.org/player/#/roberts2/oral_argument_audio/22476"
-	data-citeit-cited_audio_url='https://s3.amazonaws.com/oyez.case-media.ogg/case_data/2008/08-205/20090909r_08-205.ogg'
-	data-citeit-cited_audio_start_time='3433'
-	data-citeit-cited_transcript_url='https://apps.oyez.org/player/#/roberts2/oral_argument_audio/22476'
-	data-citeit-citing_tags='supreme-court, supreme-court-citizens-united, justice-kennedy'
-	data-citeit-cited_title='Case 08-205, Citizens United v. The Federal Election Commission'
-	data-citeit-cited_authors_names='Anthony Kennedy'
-	data-citeit-cited_authors_urls='https://supremecourthistory.org/history-of-the-court/the-current-court/justice-anthony-kennedy/, https://www.oyez.org/justices/anthony_m_kennedy'
-	data-citeit-cited_authors_twitter='https://twitter.com/hashtag/justice%20kennedy'
-	data-citeit-cited_authors-wikipedia-urls ='https://en.wikipedia.org/wiki/Anthony_Kennedy'
-	data-citeit-cited_author_wikipedia_url='https://en.wikipedia.org/wiki/Supreme_Court_of_the_United_States'
-	data-citeit-cited_authors_entities='https://twitter.com/hashtag/justice%20kennedy'
-	data-citeit-cited_authors_entities_urls = "https://www.supremecourt.gov/"
-	data-citeit-citeit_cited_work_wikipedia_url="https://en.wikipedia.org/wiki/Citizens_United_v._FEC"
-	data-citeit-cited_series = 'Oyez Supreme Court Resources'
-	data-citeit-cited_eries_url='https://www.oyez.org/'
-	data-citeit-cited_event_date='2009-09-09'
-	data-citeit-cited_event_location='United States Supreme Court, Washington, D.C (USA)'
-	data-citeit-cited_event_lattitue='38.890556'
-	data-citeit-cited_event_longitude='77.004444'
->The government silences a corporate objector, and those corporations may have the most knowledge of this on the subject.<br /><br />
-
-Corporations have lots of knowledge about environment, transportation issues, and you are silencing them during the election.</blockquote>
-
-<p>Though there may be something to Justice Kennedy's concern, I suspect the type of corporate "<b>knowlegede transfer</b>" that he describes is atypical:</p>
-
-<p>Rather than expressing their "knowledge" in a 90-minute documentary or even an informative 1-minute commercial, 
-in actual practice, most big corporate donors instead pay a group of political operators to set up a "<b>front group</b>" 
-to develop a provocative 1-minute ad on an <b>unrelated wedge issue</b>.  Kennedy's preoccupation about "knowlege" is mostly hypothetical and could be protected by a <b>exception for the actual transfer</b> of the corporations' <b>subject-matter expertise.</b></p>
 
 </div><!--wrap-->
 
+<!---------------------- End: Main Content ----------------------->
+
 <div id="navigation">
-	<a href="./">New Submission</a> | <a href="examples.html">Examples</a> | <a href="text-version.php">Text-Version</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+	<a href="./">New Submission</a> | <a href="examples.html">Examples</a> | <b>Advanced Examples</b> | <a href="text-version.php">Text-Version</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 </div>
 
-  <div id='citeit_container'><!-- CiteIt-quote-context.js injects data returned from lookup in this hidden div --></div>
-  <script>
-	// Call CiteIt.net plugin on all q-tags and blockquotes:
-	$( document ).ready(function() {
-		jQuery('q, blockquote').quoteContext();
-	});
-  </script>
+
+<div id='citeit_container'><!-- CiteIt-quote-context.js injects data returned from lookup in this hidden div --></div>
+
+<script>
+
+  // Default Base URL to current URL (www.citeit.net or localhost:8080 )
+  citing_url = document.getElementById('citing_url');
+  if(citing_url != null){
+    document.getElementById('citing_url').value = window.location.href;
+  }
+  
+  // Call CiteIt.net plugin on all q-tags and blockquotes:
+  jQuery(document).ready(function(){
+
+      jQuery('q, blockquote').quoteContext();
+
+      // Highlight YouTube Expansion
+      setTimeout(function(){
+        jQuery("span.view_on_youtube").addClass("highlight");
+      }, 1000);
+
+  });
+
+</script>
+
 
 </body>
 </html>

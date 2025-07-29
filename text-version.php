@@ -116,15 +116,12 @@
 </div>
 
 <div class="site-tagline">
-	<h2>a higher standard of citation</h2>
+	<h2>building trust in media</h2>
 </div>
 
 <ul id="top_navigation_menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-425" class="menu-item menu-item-type-post_type menu-item-object-page  page_item page-item-18 current_page_item menu-item-425"><a href="https://www.citeit.net/" aria-current="page"><span >Home</span></a></li>
 <li id="menu-item-1072" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1072"><a href="https://demo.citeit.net"><span >demo</span></a></li>
-
 <li id="menu-item-428" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8 current_page_item menu-item-428"><a href="https://www.citeit.net/code/" aria-current="page"><span >code</span></a></li>
-
-<li id="menu-item-983" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-983"><a href="https://www.citeit.net/code/?tab=volunteer"><span >Volunteer</span></a></li>
 <li id="menu-item-994" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-994"><a href="https://pages.citeit.net/"><span >Blog</span></a></li>
 <li id="menu-item-427" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-427"><a href="https://www.citeit.net/about/"><span >about</span></a></li>
 </ul>
@@ -216,15 +213,13 @@
 			<b>enables web authors to demonstrate the context</b> of their citations.
 		</p>
 		<p><b>Who:</b> CiteIt.net allows journalists, academics and web authors who want to set a higher standard of discourse.</p>
-		<p><b>How:</b> CiteIt.net is an <a href="https://pages.citeit.net/code/">open source program</a> which 
-			can be added to a website with a WordPress plugin or a bit of custom code.
-		</p>
+		<p><b>How:</b> CiteIt.net can be added to a website with a WordPress plugin or a bit of custom code.</p>
 	</div>
 
 </div><!--wrap-->
 
 	<div id="navigation">
-		<a href="https://pages.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <b>Text-Version</b> | <a href="https://meta.wikimedia.org/wiki/User:Timlangeman/sandbox">Wikipedia Proposal</a> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
+		<a href="https://pages.citeit.net/sample-code/">New Submission</a> | <a href="examples.html">Examples</a> | <a href="examples-advanced.html">Advanceed Examples</a>  <b>Text-Version</b> | <a href="https://github.com/CiteIt/citeit-sample-code">GitHub Download</a>
 	</div>
 
 
